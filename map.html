@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        margin-top: 150px;
+        margin-left: 150px;
+        margin-right: 150px;
+        margin-bottom: 150px;
+        height: 400px;
+        width: 400px;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+      
+      function initMap() {
+        var mycenter=new google.maps.LatLng(26.4502,80.1921);
+        var mycenter1=new google.maps.LatLng(21.1944,81.2989);
+
+        var mapcanvas=document.getElementById("map");
+        var myoptions={center:mycenter,zoom:5};
+        var map = new google.maps.Map(mapcanvas,myoptions);
+       var marker=new google.maps.Marker({position:mycenter,
+        animationn:google.maps.Animation.pink});
+       var marker1=new google.maps.Marker({position:mycenter1,
+        animationn:google.maps.Animation.pink});
+       google.maps.event.addListener(marker,'click',function()
+                             {    
+                        var temp=map.getZoom();
+                        map.setZoom(9);
+                        map.setCenter(marker.getPosition());
+                        window.setTimeout(function()
+                          {
+                            map.setZoom(temp);
+                            
+                          },3000);
+                              }
+       );
+       var  infowindow=new google.maps.InfoWindow({
+        content:'Pranveer Singh Institute of Technology'
+       });
+       var  infowindow1=new google.maps.InfoWindow({
+        content:'Bhilai Institute of Technology, Durg, Chhattisgarh'
+       });
+      
+
+infowindow.open(map,marker);
+infowindow1.open(map,marker1);
+        marker.setMap(map);
+        
+        marker1.setMap(map);
+      }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBgi-TyVfVe658zDSN76J__4h8MSKB-tpU&callback=initMap"
+    async defer></script>
+  </body>
+</html>
